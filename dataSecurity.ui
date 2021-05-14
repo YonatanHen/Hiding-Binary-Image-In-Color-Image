@@ -22,7 +22,7 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="ColorImageBtn">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -82,7 +82,7 @@ RGB color image steganography</string>
      <enum>Qt::AutoText</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="BinaryImageBtn">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -100,7 +100,7 @@ RGB color image steganography</string>
      <string>Add Binary Image</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="SubmitBtn">
     <property name="geometry">
      <rect>
       <x>250</x>
