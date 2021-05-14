@@ -1,9 +1,7 @@
-from tkinter import Image
-
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtCore import QDir, QFile, QFileInfo, QIODevice
 from PyQt5.QtWidgets import QVBoxLayout, QFileDialog
-
+from ConvertionFunctions.ColorImageToRGBArray import RGBConvert
 
 class MainMenu(QtWidgets.QMainWindow):
     def __init__(self):
@@ -25,3 +23,7 @@ class MainMenu(QtWidgets.QMainWindow):
         if name:
             path = name[0]
             print(path)
+            RGBConvert(path)
+
+            return path
+
