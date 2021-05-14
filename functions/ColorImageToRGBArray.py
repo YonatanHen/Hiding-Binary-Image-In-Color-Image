@@ -8,8 +8,7 @@ np.set_printoptions(threshold=sys.maxsize)
 def RGBConvert(path):
     '''Opens an image file and convert it to RGB, then convert the RGB values to binary
     For binary images, the values will be series of ones or zeroes, we can take the lsb because it represents
-    the whole bits of the pixel
-    PAY ATTENTION! COLOR IMAGE CONVERTED TO 24 bits WHEREAS BINARY IMAGE CONVERTED TO 16 BITS!'''
+    the whole bits of the pixel'''
 
     img = Image.open(path)
     arr = np.array(img)
@@ -19,3 +18,16 @@ def RGBConvert(path):
 
     # print(binArr)
     return binArr
+
+
+def binaryConvert(path):
+    '''Opens an image file and convert it to RGB, then convert the RGB values to binary
+    For binary images, the values will be series of ones or zeroes, we can take the lsb because it represents
+    the whole bits of the pixel'''
+
+    img = Image.open(path)
+    arr = np.array(img)
+
+
+    # print(binArr)
+    return arr

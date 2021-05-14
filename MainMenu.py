@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtCore import QDir, QFile, QFileInfo, QIODevice
 from PyQt5.QtWidgets import QVBoxLayout, QFileDialog
-from functions.ColorImageToRGBArray import RGBConvert
+from functions.ColorImageToRGBArray import *
 
 
 class MainMenu(QtWidgets.QMainWindow):
@@ -33,7 +33,7 @@ class MainMenu(QtWidgets.QMainWindow):
             path = name[0]
             print(path)
             if t == 'b':
-                self.binaryImg = RGBConvert(path)
+                self.binaryImg = binaryConvert(path)
                 print(self.binaryImg)
             else:
                 self.colorImg = RGBConvert(path)
