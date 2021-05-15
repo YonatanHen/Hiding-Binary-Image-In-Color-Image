@@ -28,6 +28,9 @@ def binaryConvert(path):
     img = Image.open(path)
     arr = np.array(img)
 
+    #Convert boolean to binary
+    arr = list(map(lambda x: x.astype(int), arr))
+
 
     # print(binArr)
     return arr
