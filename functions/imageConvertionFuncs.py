@@ -15,8 +15,8 @@ def RGBConvert(path):
     img = Image.open(path)
     arr = np.array(img)
 
+    # Organize pixels in 3-d array of 24-bit
     binArr = np.unpackbits(arr, axis=2)
-    arrToImage(arr, 'RGB')
     # print(binArr)
     return binArr, img
 
@@ -28,6 +28,7 @@ def binaryConvert(path):
 
     img = Image.open(path)
     arr = np.array(img)
+
     # Convert boolean to binary
     arr = np.array([x.astype(int) for x in arr])
     # print(binArr)
@@ -37,7 +38,7 @@ def binaryConvert(path):
 def arrToImage(arr, type):
     '''Function converts an arrray of bits to color image'''
 
-    #Set new image name, according to received image type
+    # Set new image name, according to received image type
     if type == 'RGB':
         imageName = 'colorImg.png'
     elif type == 'L':
@@ -49,6 +50,16 @@ def arrToImage(arr, type):
     # Convert array to image
     img = Image.fromarray(arr, type)
 
-    #Save the image
+    # Save the image
     img.save(imageName)
     img.show()
+
+
+def embeddingAlgorithm(colorImgArr, binaryImgArr=None):
+    # newArr = [ for col in [row for row in colorImgArr]]
+    for row in range(len(colorImgArr)):
+        for col in range(row+1):
+            colorImgArr[row][col][23] = 1 #TODO: Chnage this to the xor value
+
+    print('\n\n\n\n\n\n')
+    print(colorImgArr)

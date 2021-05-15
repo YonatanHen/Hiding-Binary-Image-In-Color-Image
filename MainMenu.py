@@ -55,13 +55,16 @@ class MainMenu(QtWidgets.QMainWindow):
                 raise NotImplementedError
             elif not checkImagesSize(self.binImgObj, self.colorImgObj):
                 raise ValueError
+            else:
+                print('Successfully received input, implmenting algorithm...')
+                # If everything is ok
+                embeddingAlgorithm(self.colorImg, self.binaryImg)
+
         except NotImplementedError:
-            errorMessage('Binary & Color images must uploaded!')
+            errorMessage('Binary & Color images must be uploaded!')
         except ValueError:
-            errorMessage('Binary image must be smaller than color image')
-        else:
-            #If everything is ok, continue here
-            return
+            errorMessage('Binary image must be smaller than color image!')
+
         finally:
             #Break function in any case
             return
