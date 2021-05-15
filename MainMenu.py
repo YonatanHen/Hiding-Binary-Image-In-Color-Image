@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtCore import QDir, QFile, QFileInfo, QIODevice
 from PyQt5.QtWidgets import QVBoxLayout, QFileDialog
-from functions.ColorImageToRGBArray import *
+from functions.imageConvertionFuncs import *
 
 
 class MainMenu(QtWidgets.QMainWindow):
