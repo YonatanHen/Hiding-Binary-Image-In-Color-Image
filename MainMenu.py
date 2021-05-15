@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtCore import QDir, QFile, QFileInfo, QIODevice
 from PyQt5.QtWidgets import QVBoxLayout, QFileDialog
 from functions.imageConvertionFuncs import *
-from functions.errorMessages import imagesNotLoadedErr
+from functions.errorMessages import *
 
 
 class MainMenu(QtWidgets.QMainWindow):
@@ -42,13 +42,27 @@ class MainMenu(QtWidgets.QMainWindow):
             path = name[0]
             print(path)
             if t == 'b':
-                self.binaryImg = binaryConvert(path)
+                self.binaryImg, self.binImgObj = binaryConvert(path)
                 print(self.binaryImg)
             else:
-                self.colorImg = RGBConvert(path)
+                self.colorImg, self.colorImgObj = RGBConvert(path)
                 print(self.colorImg)
             return path
 
     def handleSubmit(self):
-        if self.colorImg is None or self.binaryImg is None:
-            imagesNotLoadedErr()
+        try:
+            if self.colorImg is None or self.binaryImg is None:
+                raise NotImplementedError
+            elif not checkImagesSize(self.binImgObj, self.colorImgObj):
+                raise ValueError
+        except NotImplementedError:
+            errorMessage('Binary & Color images must uploaded!')
+        except ValueError:
+            errorMessage('Binary image must be smaller than color image')
+        else:
+            #If everything is ok, continue here
+            return
+        finally:
+            #Break function in any case
+            return
+

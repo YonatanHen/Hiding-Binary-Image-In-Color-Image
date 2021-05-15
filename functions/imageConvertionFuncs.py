@@ -17,7 +17,7 @@ def RGBConvert(path):
 
 
     # print(binArr)
-    return binArr
+    return binArr, img
 
 
 def binaryConvert(path):
@@ -33,4 +33,4 @@ def binaryConvert(path):
 
 
     # print(binArr)
-    return arr
+    return arr, img

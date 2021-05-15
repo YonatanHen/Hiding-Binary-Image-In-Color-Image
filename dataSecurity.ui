@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>702</width>
-    <height>497</height>
+    <height>509</height>
    </rect>
   </property>
   <property name="font">
@@ -76,7 +76,7 @@
     </property>
     <property name="text">
      <string>Improved method using a two Exclusive-OR to binary image in
-RGB color image steganography</string>
+RGB color image steganography</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
@@ -125,7 +125,7 @@ RGB color image steganography</string>
      <x>0</x>
      <y>0</y>
      <width>702</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
