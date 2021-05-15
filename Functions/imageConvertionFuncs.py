@@ -1,7 +1,7 @@
 import numpy as np
 from PIL import Image
 import sys
-from functions.errorMessages import errorMessage
+from Functions.errorMessages import errorMessage
 
 # To see the full output uncommit the line below
 np.set_printoptions(threshold=sys.maxsize)
@@ -47,19 +47,13 @@ def arrToImage(arr, type):
         print('Err')
         return
 
-    # Convert array to image
-    img = Image.fromarray(arr, type)
+    # Pacl bits again and convert array to image
+    encryptArr = np.packbits(arr, axis=2)
+    img = Image.fromarray(encryptArr, type)
 
     # Save the image
     img.save(imageName)
     img.show()
 
 
-def embeddingAlgorithm(colorImgArr, binaryImgArr=None):
-    # newArr = [ for col in [row for row in colorImgArr]]
-    for row in range(len(colorImgArr)):
-        for col in range(row+1):
-            colorImgArr[row][col][23] = 1 #TODO: Chnage this to the xor value
 
-    print('\n\n\n\n\n\n')
-    print(colorImgArr)

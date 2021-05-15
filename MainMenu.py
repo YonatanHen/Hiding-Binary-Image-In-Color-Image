@@ -1,8 +1,9 @@
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtCore import QDir, QFile, QFileInfo, QIODevice
 from PyQt5.QtWidgets import QVBoxLayout, QFileDialog
-from functions.imageConvertionFuncs import *
-from functions.errorMessages import *
+from Functions.imageConvertionFuncs import *
+from Functions.errorMessages import *
+from Functions.algorithms import *
 
 
 class MainMenu(QtWidgets.QMainWindow):
@@ -43,10 +44,10 @@ class MainMenu(QtWidgets.QMainWindow):
             print(path)
             if t == 'b':
                 self.binaryImg, self.binImgObj = binaryConvert(path)
-                print(self.binaryImg)
+                #print(self.binaryImg)
             else:
                 self.colorImg, self.colorImgObj = RGBConvert(path)
-                print(self.colorImg)
+                #print(self.colorImg)
             return path
 
     def handleSubmit(self):
@@ -57,8 +58,12 @@ class MainMenu(QtWidgets.QMainWindow):
                 raise ValueError
             else:
                 print('Successfully received input, implmenting algorithm...')
-                # If everything is ok
-                embeddingAlgorithm(self.colorImg, self.binaryImg)
+
+                # If everything is ok, embed the binary image into the color image
+                self.colorImg = embeddingAlgorithm(self.colorImg, self.binaryImg)
+
+                #show results
+                arrToImage(self.colorImg, 'RGB')
 
         except NotImplementedError:
             errorMessage('Binary & Color images must be uploaded!')
