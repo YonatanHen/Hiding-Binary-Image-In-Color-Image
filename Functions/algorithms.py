@@ -38,8 +38,7 @@ def embeddingAlgorithm(colorImgArr, binaryImgArr):
 
 def reconstructedAlgorithm(colorImgArr):
     """Function implements the reconstructed algorithm which described in chapter 6.2 in the article"""
-
-    reconstructedImage = [[]]
+    reconstructedImage = [[0 for i in range(len(colorImgArr[0]))] for j in range(len(colorImgArr))]
     for row in range(len(colorImgArr)):
         for col in range(0, row):
             # If XOR (LSB of B part Img_sc , LSB of G part of Img_sc )=00 or 11
