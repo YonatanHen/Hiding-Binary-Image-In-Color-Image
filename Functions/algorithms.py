@@ -38,22 +38,25 @@ def embeddingAlgorithm(colorImgArr, binaryImgArr):
 
 def reconstructedAlgorithm(colorImgArr):
     """Function implements the reconstructed algorithm which described in chapter 6.2 in the article"""
-    reconstructedImage = [[0 for i in range(len(colorImgArr[0]))] for j in range(len(colorImgArr))]
+    reconstructedImage = []
+    # reconstructedImage = [[0 for i in range(len(colorImgArr[0]))] for j in range(len(colorImgArr))]
     for row in range(len(colorImgArr)):
-        for col in range(0, row):
+        reconstructedImage.append([])
+        for col in range(0, len(colorImgArr)):
             # If XOR (LSB of B part Img_sc , LSB of G part of Img_sc )=00 or 11
             if not XOR(colorImgArr[row][col][lsbB], colorImgArr[row][col][lsbG]):
                 # if 11 -> false, else if 10 -> true
                 if not XOR(1, colorImgArr[row][col][lsbR]):
+                    reconstructedImage[row].append(1)
+                else:
+                    reconstructedImage[row].append(0)
 
-                    # IM HERE!!
-
-                    reconstructedImage[row][col] = 1
+                # reconstructedImage[row][col] = 1
             else:  # If XOR (LSB of B part Img_sc , LSB of G part of Img_sc )=01 or 10
                 if XOR(0, colorImgArr[row][col][lsbR]):
+                    reconstructedImage[row].append(0)
+                else:
+                    reconstructedImage[row].append(1)
 
-                    # IM HERE!!
-
-                    reconstructedImage[row][col] = 0
-
+    print(reconstructedImage)
     return reconstructedImage

@@ -36,19 +36,21 @@ def binaryConvert(path):
 
 def arrToImage(arr, type):
     '''Function converts an arrray of bits to color image'''
-
+    encryptArr = arr
     # Set new image name, according to received image type
     if type == 'RGB':
         imageName = 'colorImg.png'
+        # Pacl bits again and convert array to image
+        encryptArr = np.packbits(arr, axis=2)
     elif type == 'L':
         imageName = 'binaryImg.png'
     else:
         print('Err')
         return
 
-    # Pacl bits again and convert array to image
-    encryptArr = np.packbits(arr, axis=2)
     img = Image.fromarray(encryptArr, type)
+
+
 
     # Save the image
     img.save(imageName)
