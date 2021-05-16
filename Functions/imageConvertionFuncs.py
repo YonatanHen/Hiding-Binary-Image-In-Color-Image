@@ -14,10 +14,8 @@ def RGBConvert(path):
 
     img = Image.open(path)
     arr = np.array(img)
-
     # Organize pixels in 3-d array of 24-bit
     binArr = np.unpackbits(arr, axis=2)
-    # print(binArr)
     return binArr, img
 
 
@@ -31,6 +29,7 @@ def binaryConvert(path):
 
     # Convert boolean to binary
     arr = np.array([x.astype(int) for x in arr])
+    print(arr)
     # print(binArr)
     return arr, img
 

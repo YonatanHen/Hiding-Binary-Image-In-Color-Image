@@ -1,11 +1,11 @@
-# Utility functions:
+# Utility Functions:
 
 def XOR(a, b):
     """Implements XOR operation: if a != b return true, else false."""
     return a is not b
 
 
-# End of utility functions
+# End of utility Functions
 
 # Constants:
 
@@ -36,6 +36,25 @@ def embeddingAlgorithm(colorImgArr, binaryImgArr):
     return colorImgArr
 
 
-def reconstructedAlgorithm():
+def reconstructedAlgorithm(colorImgArr):
     """Function implements the reconstructed algorithm which described in chapter 6.2 in the article"""
-    return
+
+    reconstructedImage = [[]]
+    for row in range(len(colorImgArr)):
+        for col in range(0, row):
+            # If XOR (LSB of B part Img_sc , LSB of G part of Img_sc )=00 or 11
+            if not XOR(colorImgArr[row][col][lsbB], colorImgArr[row][col][lsbG]):
+                # if 11 -> false, else if 10 -> true
+                if not XOR(1, colorImgArr[row][col][lsbR]):
+
+                    # IM HERE!!
+
+                    reconstructedImage[row][col] = 1
+            else:  # If XOR (LSB of B part Img_sc , LSB of G part of Img_sc )=01 or 10
+                if XOR(0, colorImgArr[row][col][lsbR]):
+
+                    # IM HERE!!
+
+                    reconstructedImage[row][col] = 0
+
+    return reconstructedImage

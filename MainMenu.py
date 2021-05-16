@@ -25,7 +25,7 @@ class MainMenu(QtWidgets.QMainWindow):
         vbox.addWidget(self.ColorImageBtn)
         self.ColorImageBtn.clicked.connect(lambda: self.loadImage('c'))
 
-        # upload color image
+        # upload back & white image
         vbox.addWidget(self.BinaryImageBtn)
         self.BinaryImageBtn.clicked.connect(lambda: self.loadImage('b'))
 
@@ -33,21 +33,31 @@ class MainMenu(QtWidgets.QMainWindow):
         vbox.addWidget(self.SubmitBtn)
         self.SubmitBtn.clicked.connect(lambda: self.handleSubmit())
 
+        # decipher button
+        vbox.addWidget(self.DecipherBtn)
+        self.DecipherBtn.clicked.connect(lambda: self.handleDecipher())
+
         # Show the GUI
         self.show()
+
+    def handleDecipher(self):
+        path = QFileDialog.getOpenFileName(self, 'Select Color Image', QDir.currentPath(),
+                                           "Image files (*.jpg, *.gif, *.png)")
+        self.colorImg, self.colorImgObj = RGBConvert(path[0])
+
+        arrToImage(reconstructedAlgorithm(self.colorImg), 'L')
 
     def loadImage(self, t):
         name = QFileDialog.getOpenFileName(self, 'Select Color Image', QDir.currentPath(),
                                            "Image files (*.jpg, *.gif, *.png)")
         if name:
             path = name[0]
-            print(path)
             if t == 'b':
                 self.binaryImg, self.binImgObj = binaryConvert(path)
-                #print(self.binaryImg)
+                # print(self.binaryImg)
             else:
                 self.colorImg, self.colorImgObj = RGBConvert(path)
-                #print(self.colorImg)
+                # print(self.colorImg)
             return path
 
     def handleSubmit(self):
@@ -62,8 +72,7 @@ class MainMenu(QtWidgets.QMainWindow):
                 # If everything is ok, embed the binary image into the color image
                 self.colorImg = embeddingAlgorithm(self.colorImg, self.binaryImg)
 
-                #show results
-                arrToImage(self.colorImg, 'RGB')
+                # show results
 
         except NotImplementedError:
             errorMessage('Binary & Color images must be uploaded!')
@@ -71,6 +80,5 @@ class MainMenu(QtWidgets.QMainWindow):
             errorMessage('Binary image must be smaller than color image!')
 
         finally:
-            #Break function in any case
+            # Break function in any case
             return
-
