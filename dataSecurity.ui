@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>702</width>
-    <height>509</height>
+    <width>718</width>
+    <height>338</height>
    </rect>
   </property>
   <property name="font">
@@ -25,8 +25,8 @@
    <widget class="QPushButton" name="ColorImageBtn">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>200</y>
+      <x>80</x>
+      <y>160</y>
       <width>181</width>
       <height>61</height>
      </rect>
@@ -85,8 +85,8 @@ RGB color image steganography</string>
    <widget class="QPushButton" name="BinaryImageBtn">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>300</y>
+      <x>270</x>
+      <y>160</y>
       <width>181</width>
       <height>61</height>
      </rect>
@@ -103,8 +103,8 @@ RGB color image steganography</string>
    <widget class="QPushButton" name="SubmitBtn">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>390</y>
+      <x>460</x>
+      <y>160</y>
       <width>181</width>
       <height>61</height>
      </rect>
@@ -118,14 +118,32 @@ RGB color image steganography</string>
      <string>Submit</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="DecipherBtn">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>240</y>
+      <width>181</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Decipher Image</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>702</width>
-     <height>26</height>
+     <width>718</width>
+     <height>18</height>
     </rect>
    </property>
   </widget>

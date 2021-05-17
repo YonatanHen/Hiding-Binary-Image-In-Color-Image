@@ -12,7 +12,8 @@ class MainMenu(QtWidgets.QMainWindow):
         uic.loadUi('dataSecurity.ui', self)  # Load the .ui file
 
         # Class variables definition (Optional but the vars definitions below necessary)
-        self.colorImg = self.binaryImg = None
+        self.encryptedImg = self.binaryImg = self.decipherImg = None
+        self.submitted = False
 
         # Widgets definitions
         vbox = QVBoxLayout(self)
@@ -25,13 +26,17 @@ class MainMenu(QtWidgets.QMainWindow):
         vbox.addWidget(self.ColorImageBtn)
         self.ColorImageBtn.clicked.connect(lambda: self.loadImage('c'))
 
-        # upload color image
+        # upload back & white image
         vbox.addWidget(self.BinaryImageBtn)
         self.BinaryImageBtn.clicked.connect(lambda: self.loadImage('b'))
 
         # Submit button
         vbox.addWidget(self.SubmitBtn)
         self.SubmitBtn.clicked.connect(lambda: self.handleSubmit())
+
+        # decipher button
+        vbox.addWidget(self.DecipherBtn)
+        self.DecipherBtn.clicked.connect(lambda: self.handleDecipher())
 
         # Show the GUI
         self.show()
@@ -41,18 +46,17 @@ class MainMenu(QtWidgets.QMainWindow):
                                            "Image files (*.jpg, *.gif, *.png)")
         if name:
             path = name[0]
-            print(path)
             if t == 'b':
                 self.binaryImg, self.binImgObj = binaryConvert(path)
-                #print(self.binaryImg)
+                # print(self.binaryImg)
             else:
-                self.colorImg, self.colorImgObj = RGBConvert(path)
-                #print(self.colorImg)
+                self.encryptedImg, self.colorImgObj = RGBConvert(path)
+                # print(self.colorImg)
             return path
 
     def handleSubmit(self):
         try:
-            if self.colorImg is None or self.binaryImg is None:
+            if self.encryptedImg is None or self.binaryImg is None:
                 raise NotImplementedError
             elif not checkImagesSize(self.binImgObj, self.colorImgObj):
                 raise ValueError
@@ -60,10 +64,11 @@ class MainMenu(QtWidgets.QMainWindow):
                 print('Successfully received input, implmenting algorithm...')
 
                 # If everything is ok, embed the binary image into the color image
-                self.colorImg = embeddingAlgorithm(self.colorImg, self.binaryImg)
+                self.encryptedImg = embeddingAlgorithm(self.encryptedImg, self.binaryImg)
 
-                #show results
-                arrToImage(self.colorImg, 'RGB')
+                # show results
+                arrToImage(self.encryptedImg, 'RGB')
+                self.submitted = True
 
         except NotImplementedError:
             errorMessage('Binary & Color images must be uploaded!')
@@ -71,6 +76,22 @@ class MainMenu(QtWidgets.QMainWindow):
             errorMessage('Binary image must be smaller than color image!')
 
         finally:
-            #Break function in any case
+            # Break function in any case
             return
 
+    def handleDecipher(self):
+        try:
+            if not self.submitted:
+                raise NotImplementedError
+
+        except NotImplementedError:
+            errorMessage('Embedding algorithm must be done before reconstructing!')
+
+        #If submitted
+        else:
+            self.decipherImg = reconstructedAlgorithm(self.encryptedImg, self.binaryImg)
+            arrToImage(self.decipherImg, 'L')
+
+        finally:
+            # Break function in any case
+            return
