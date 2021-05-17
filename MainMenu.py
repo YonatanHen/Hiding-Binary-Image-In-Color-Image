@@ -68,7 +68,6 @@ class MainMenu(QtWidgets.QMainWindow):
 
                 # show results
                 arrToImage(self.encryptedImg, 'RGB')
-                reconstructedAlgorithm(self.encryptedImg, self.binaryImg)
                 self.submitted = True
 
         except NotImplementedError:
@@ -82,7 +81,7 @@ class MainMenu(QtWidgets.QMainWindow):
 
     def handleDecipher(self):
         try:
-            if self.encryptedImg is None or self.binaryImg is None:
+            if not self.submitted:
                 raise NotImplementedError
 
         except NotImplementedError:
@@ -90,10 +89,9 @@ class MainMenu(QtWidgets.QMainWindow):
 
         #If submitted
         else:
-            self.decipherImg = reconstructedAlgorithm(self.encryptedImg)
-
-            # show results
-            arrToImage(self.encryptedImg, 'L')
+            self.decipherImg = reconstructedAlgorithm(self.encryptedImg, self.binaryImg)
+            arrToImage(self.decipherImg, 'L')
 
         finally:
+            # Break function in any case
             return

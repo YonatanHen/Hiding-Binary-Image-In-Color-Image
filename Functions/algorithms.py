@@ -2,7 +2,7 @@
 
 def XOR(a, b):
     """Implements XOR operation: if a != b return true, else false."""
-    return a is not b
+    return int(a) is not int(b)
 
 
 # End of utility Functions
