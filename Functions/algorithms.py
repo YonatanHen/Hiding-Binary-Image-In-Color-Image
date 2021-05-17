@@ -1,4 +1,6 @@
 # Utility Functions:
+import numpy as np
+
 
 def XOR(a, b):
     """Implements XOR operation: if a != b return true, else false."""
@@ -54,5 +56,5 @@ def reconstructedAlgorithm(colorImgArr, binaryImgArr):
                 else:
                     reconstructedImage[row].append(1)
 
-    print(reconstructedImage)
+    print(np.array(reconstructedImage, np.bool8))
     return reconstructedImage

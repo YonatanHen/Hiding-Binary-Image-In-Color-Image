@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QMessageBox
 from PIL import Image
 
+
 def errorMessage(text):
     '''Handles the GUI error message box'''
 
@@ -11,7 +12,8 @@ def errorMessage(text):
     msg.setWindowTitle("Error")
     msg.exec_()
 
-def checkImagesSize(bin,color):
+
+def checkImagesSize(bin, color):
     '''Calculates total pixels in each image, return true of color > bin, else false.
      The binary image will be embedded in the color one so the color image must contain at least
      the number of bits of the binary picture.'''
@@ -22,5 +24,5 @@ def checkImagesSize(bin,color):
     b_pixels = b_width * b_height
     c_pixels = c_width * c_height
 
-    #implement the condition
+    # implement the condition
     return b_pixels <= c_pixels
