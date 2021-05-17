@@ -23,7 +23,7 @@ def embeddingAlgorithm(colorImgArr, binaryImgArr):
     Note that zip stops when the shorter of the values stops"""
 
     for row, binRow in zip(range(len(colorImgArr)), range(len(binaryImgArr))):
-        for col, binCol in zip(range(0, len(colorImgArr[row])), range(0, len(binaryImgArr[binRow]))):
+        for col, binCol in zip(range(len(colorImgArr[row])), range(len(binaryImgArr[binRow]))):
             if not XOR(binaryImgArr[binRow][binCol], colorImgArr[row][col][lsbR]):  # XOR(LSB of Img_s, LSB of R part of Img_c)) = 00 or 11, i.e false
                 if not XOR(1, colorImgArr[row][col][lsbG]):  # LSB of G part = 1, i.e XOR(1,LSB of G) = false
                     colorImgArr[row][col][lsbB] = 1
@@ -56,5 +56,4 @@ def reconstructedAlgorithm(colorImgArr, binaryImgArr):
                 else:
                     reconstructedImage[row].append(1)
 
-    print(np.array(reconstructedImage, np.bool8))
     return reconstructedImage
