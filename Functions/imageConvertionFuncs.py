@@ -28,8 +28,8 @@ def binaryConvert(path):
     arr = np.array(img)
 
     # Convert boolean to binary
-    arr = np.array([x.astype(int) for x in arr])
-    print(arr)
+    newArr = [[1 if x else 0 for x in y] for y in arr]
+    print(newArr)
     # print(binArr)
     return arr, img
 
@@ -40,21 +40,26 @@ def arrToImage(arr, type):
     # Set new image name, according to received image type
     if type == 'RGB':
         imageName = 'colorImg.png'
-        # Pacl bits again and convert array to image
+        # Pack bits again and convert array to image
         encryptArr = np.packbits(arr, axis=2)
+        img = Image.fromarray(encryptArr, type)
+
+        # Save the image
+        img.save(imageName)
+        img.show()
     elif type == 'L':
         imageName = 'binaryImg.png'
+        print(np.array([[255 if x == 1 else 0 for x in y] for y in arr]))
+        img2 = Image.fromarray(np.array([[255 if x == 1 else 0 for x in y] for y in arr]), 'PA').convert('1')
+        print(img2)
+        # Save the image
+        img2.save(imageName)
+        img2.show()
     else:
         print('Err')
         return
 
-    img = Image.fromarray(encryptArr, type)
 
-
-
-    # Save the image
-    img.save(imageName)
-    img.show()
 
 
 
