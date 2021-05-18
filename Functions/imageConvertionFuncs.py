@@ -29,6 +29,14 @@ def binaryConvert(path):
 
     # Convert boolean to binary
     newArr = [[1 if x else 0 for x in y] for y in arr]
+
+    # Improving the Algorithm - David ##
+    for i in range(0, len(newArr)-2, 2):
+        newArr[i], newArr[i + 1] = newArr[i + 1], newArr[i]
+    for i in range(len(newArr)):
+        for j in range(len(newArr[i])-1):
+            newArr[i][j], newArr[i][j + 1] = newArr[i][j + 1], newArr[i][j]
+
     print(newArr)
     # print(binArr)
     return arr, img
@@ -50,6 +58,14 @@ def arrToImage(arr, type):
     elif type == 'L':
         imageName = 'binaryImg.png'
         print(np.array([[255 if x == 1 else 0 for x in y] for y in arr]))
+
+        #revert changes - David
+        for i in range(0, len(arr) - 2, 2):
+            arr[i], arr[i + 1] = arr[i + 1], arr[i]
+        for i in range(len(arr)):
+            for j in range(len(arr[i]) - 1):
+                arr[i][j], arr[i][j + 1] = arr[i][j + 1], arr[i][j]
+
         img2 = Image.fromarray(np.array([[255 if x == 1 else 0 for x in y] for y in arr]), 'PA').convert('1')
         print(img2)
         # Save the image
