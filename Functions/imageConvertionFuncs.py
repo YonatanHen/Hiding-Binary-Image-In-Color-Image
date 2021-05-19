@@ -24,22 +24,14 @@ def binaryConvert(path):
     For binary images, the values will be series of ones or zeroes, we can take the lsb because it represents
     the whole bits of the pixel'''
 
-    img = Image.open(path)
+    img = Image.open(path).convert('L')
     arr = np.array(img)
-
     # Convert boolean to binary
-    newArr = [[1 if x else 0 for x in y] for y in arr]
-
-    # Improving the Algorithm - David ##
-    for i in range(0, len(newArr)-2, 2):
-        newArr[i], newArr[i + 1] = newArr[i + 1], newArr[i]
-    for i in range(len(newArr)):
-        for j in range(len(newArr[i])-1):
-            newArr[i][j], newArr[i][j + 1] = newArr[i][j + 1], newArr[i][j]
+    newArr = ~arr
+    newArr[newArr > 0] = 1
 
     print(newArr)
-    # print(binArr)
-    return arr, img
+    return newArr, img
 
 
 def arrToImage(arr, type):
@@ -57,16 +49,14 @@ def arrToImage(arr, type):
         img.show()
     elif type == 'L':
         imageName = 'binaryImg.png'
-        print(np.array([[255 if x == 1 else 0 for x in y] for y in arr]))
-
-        #revert changes - David
-        for i in range(0, len(arr) - 2, 2):
-            arr[i], arr[i + 1] = arr[i + 1], arr[i]
-        for i in range(len(arr)):
-            for j in range(len(arr[i]) - 1):
-                arr[i][j], arr[i][j + 1] = arr[i][j + 1], arr[i][j]
-
-        img2 = Image.fromarray(np.array([[255 if x == 1 else 0 for x in y] for y in arr]), 'PA').convert('1')
+        # print(np.array([[255 if x == 1 else 0 for x in y] for y in arr]))
+        print(arr)
+        width = len(arr)
+        height = len(arr[0])
+        arr = np.array(arr).flatten()
+        arr = np.array(list(map(lambda x: 255 if x == 0 else 0, arr))).reshape(width, height)
+        print(arr)
+        img2 = Image.fromarray(arr, 'PA').convert('1')
         print(img2)
         # Save the image
         img2.save(imageName)

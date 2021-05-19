@@ -44,7 +44,7 @@ def reconstructedAlgorithm(colorImgArr, binaryImgArr):
     # reconstructedImage = [[0 for i in range(len(colorImgArr[0]))] for j in range(len(colorImgArr))]
     for row, binRow in zip(range(len(colorImgArr)), range(len(binaryImgArr))):
         reconstructedImage.append([])
-        for col, binCol in zip(range(0, len(colorImgArr[row])), range(0, len(binaryImgArr[binRow]))):
+        for col, binCol in zip(range(len(colorImgArr[row])), range(len(binaryImgArr[binRow]))):
             if not XOR(colorImgArr[row][col][lsbB], colorImgArr[row][col][lsbG]): # If XOR (LSB of B part Img_sc , LSB of G part of Img_sc )=00 or 11
                 if not XOR(1, colorImgArr[row][col][lsbR]):     # if 11 -> false, else if 10 -> true
                     reconstructedImage[row].append(1)
