@@ -46,7 +46,7 @@ def reconstructedAlgorithm(colorImgArr, binaryImgArr):
         reconstructedImage.append([])
         for col, binCol in zip(range(len(colorImgArr[row])), range(len(binaryImgArr[binRow]))):
             if not XOR(colorImgArr[row][col][lsbB], colorImgArr[row][col][lsbG]): # If XOR (LSB of B part Img_sc , LSB of G part of Img_sc )=00 or 11
-                if not XOR(1, colorImgArr[row][lsbR]):     # if 11 -> false, else if 10 -> true
+                if not XOR(1, colorImgArr[row][col][lsbR]):     # if 11 -> false, else if 10 -> true
                     reconstructedImage[row].append(1)
                 else:
                     reconstructedImage[row].append(0)
