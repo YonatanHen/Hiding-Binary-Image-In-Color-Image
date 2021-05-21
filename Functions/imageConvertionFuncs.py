@@ -24,14 +24,14 @@ def binaryConvert(path):
     For binary images, the values will be series of ones or zeroes, we can take the lsb because it represents
     the whole bits of the pixel'''
 
-    img = Image.open(path)
+    img = Image.open(path).convert('L')
     arr = np.array(img)
-
     # Convert boolean to binary
-    arr = np.array([x.astype(int) for x in arr])
-    print(arr)
-    # print(binArr)
-    return arr, img
+    newArr = ~arr
+    newArr[newArr > 0] = 1
+    newArr = DavidsImprovement(newArr)
+    print(newArr)
+    return newArr, img
 
 
 def arrToImage(arr, type):
@@ -49,7 +49,15 @@ def arrToImage(arr, type):
         img.show()
     elif type == 'L':
         imageName = 'binaryImg.png'
-        img2 = Image.fromarray(np.array(arr, np.bool8), '1')
+        # print(np.array([[255 if x == 1 else 0 for x in y] for y in arr]))
+        print(arr)
+        width = len(arr)
+        height = len(arr[0])
+        arr = np.array(arr).flatten()
+        arr = np.array(list(map(lambda x: 255 if x == 0 else 0, arr))).reshape(width, height)
+        print(arr)
+        img2 = Image.fromarray(arr, 'PA').convert('1')
+        print(img2)
         # Save the image
         img2.save(imageName)
         img2.show()
@@ -58,6 +66,11 @@ def arrToImage(arr, type):
         return
 
 
+def DavidsImprovement(binImage):
+    # switching bits + replace even with odd rows
+    for i in range(len(binImage)-1):
+        for j in range(len(binImage[i]) - 2):
+            binImage[i][j], binImage[i][j + 1] = binImage[i][j + 1], binImage[i][j]
+        binImage[i], binImage[i + 1] = binImage[i + 1], binImage[i]
 
-
-
+    return binImage

@@ -89,7 +89,8 @@ class MainMenu(QtWidgets.QMainWindow):
 
         #If submitted
         else:
-            self.decipherImg = reconstructedAlgorithm(self.encryptedImg, self.binaryImg)
+            self.decipherImg = DavidsImprovement(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
+
             arrToImage(self.decipherImg, 'L')
 
         finally:
