@@ -25,6 +25,7 @@ def binaryConvert(path):
     the whole bits of the pixel'''
 
     img = Image.open(path).convert('L')
+
     arr = np.array(img)
     # Convert boolean to binary
     newArr = ~arr

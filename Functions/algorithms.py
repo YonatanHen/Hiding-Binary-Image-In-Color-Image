@@ -22,9 +22,9 @@ def embeddingAlgorithm(colorImgArr, binaryImgArr):
     """Function implements the embedding algorithm which described in chapter 6.1 in the article.
     Note that zip stops when the shorter of the values stops"""
 
-    for row, binRow in zip(range(len(colorImgArr)), range(len(binaryImgArr))):
-        for col, binCol in zip(range(len(colorImgArr[row])), range(len(binaryImgArr[binRow]))):
-            if not XOR(binaryImgArr[binRow][binCol], colorImgArr[row][col][lsbR]):  # XOR(LSB of Img_s, LSB of R part of Img_c)) = 00 or 11, i.e false
+    for row in range(len(binaryImgArr)):
+        for col in range(len(binaryImgArr[row])):
+            if not XOR(binaryImgArr[row][col], colorImgArr[row][col][lsbR]):  # XOR(LSB of Img_s, LSB of R part of Img_c)) = 00 or 11, i.e false
                 if not XOR(1, colorImgArr[row][col][lsbG]):  # LSB of G part = 1, i.e XOR(1,LSB of G) = false
                     colorImgArr[row][col][lsbB] = 1
                 else:
@@ -42,9 +42,9 @@ def reconstructedAlgorithm(colorImgArr, binaryImgArr):
     """Function implements the reconstructed algorithm which described in chapter 6.2 in the article"""
     reconstructedImage = []
     # reconstructedImage = [[0 for i in range(len(colorImgArr[0]))] for j in range(len(colorImgArr))]
-    for row, binRow in zip(range(len(colorImgArr)), range(len(binaryImgArr))):
+    for row in range(len(binaryImgArr)):
         reconstructedImage.append([])
-        for col, binCol in zip(range(len(colorImgArr[row])), range(len(binaryImgArr[binRow]))):
+        for col in range(len(binaryImgArr[row])):
             if not XOR(colorImgArr[row][col][lsbB], colorImgArr[row][col][lsbG]): # If XOR (LSB of B part Img_sc , LSB of G part of Img_sc )=00 or 11
                 if not XOR(1, colorImgArr[row][col][lsbR]):     # if 11 -> false, else if 10 -> true
                     reconstructedImage[row].append(1)
