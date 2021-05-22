@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QVBoxLayout, QFileDialog
 from Functions.imageConvertionFuncs import *
 from Functions.errorMessages import *
 from Functions.algorithms import *
+from Functions.resizeImage import *
 
 
 class MainMenu(QtWidgets.QMainWindow):
@@ -45,14 +46,18 @@ class MainMenu(QtWidgets.QMainWindow):
         name = QFileDialog.getOpenFileName(self, 'Select Color Image', QDir.currentPath(),
                                            "Image files (*.jpg, *.gif, *.png)")
         if name:
-            path = name[0]
+            shrinkImage(name[0])
+            # shrinkImage(name[0])
             if t == 'b':
-                self.binaryImg, self.binImgObj = binaryConvert(path)
+                self.binImgPath = name[0]
+                self.binaryImg, self.binImgObj = binaryConvert(self.binImgPath)
                 # print(self.binaryImg)
             else:
-                self.encryptedImg, self.colorImgObj = RGBConvert(path)
+                self.colorImgPath = name[0]
+                self.encryptedImg, self.colorImgObj = RGBConvert(self.colorImgPath)
                 # print(self.colorImg)
-            return path
+
+        return
 
     def handleSubmit(self):
         try:
@@ -67,7 +72,8 @@ class MainMenu(QtWidgets.QMainWindow):
                 self.encryptedImg = embeddingAlgorithm(self.encryptedImg, self.binaryImg)
 
                 # show results
-                arrToImage(self.encryptedImg, 'RGB')
+                img = arrToImage(self.encryptedImg, 'RGB')
+                img.show()
                 self.submitted = True
 
         except NotImplementedError:
@@ -91,8 +97,9 @@ class MainMenu(QtWidgets.QMainWindow):
         else:
             self.decipherImg = DavidsImprovement(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
 
-            arrToImage(self.decipherImg, 'L')
-
+            img = arrToImage(self.decipherImg, 'L')
+            enlargeImage('binaryImg.png')
+            img.show()
         finally:
             # Break function in any case
             return

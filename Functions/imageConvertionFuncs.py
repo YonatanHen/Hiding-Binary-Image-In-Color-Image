@@ -46,7 +46,7 @@ def arrToImage(arr, type):
 
         # Save the image
         img.save(imageName)
-        img.show()
+        return img
     elif type == 'L':
         imageName = 'binaryImg.png'
         # print(np.array([[255 if x == 1 else 0 for x in y] for y in arr]))
@@ -60,7 +60,7 @@ def arrToImage(arr, type):
         print(img2)
         # Save the image
         img2.save(imageName)
-        img2.show()
+        return img2
     else:
         print('Err')
         return
