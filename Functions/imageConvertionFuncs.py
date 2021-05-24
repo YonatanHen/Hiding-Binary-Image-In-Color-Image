@@ -31,7 +31,7 @@ def binaryConvert(path):
     # Convert boolean to binary
     newArr = ~arr
     newArr[newArr > 0] = 1
-    newArr = DavidsImprovement(newArr)
+    newArr = FlipColumnAndRows(newArr)
 
     return newArr, img
 
@@ -65,7 +65,7 @@ def arrToImage(arr, type):
         return
 
 
-def DavidsImprovement(binImage):
+def FlipColumnAndRows(binImage):
     # switching bits + replace even with odd rows
     for i in range(len(binImage)-1):
         for j in range(len(binImage[i]) - 2):
