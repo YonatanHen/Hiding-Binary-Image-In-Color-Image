@@ -16,6 +16,15 @@ class MainMenu(QtWidgets.QMainWindow):
         self.encryptedImg = self.binaryImg = self.decipherImg = None
         self.submitted = False
 
+        improveRuntimeReply = QMessageBox.question(self, "Before we get started!",
+                                                   "Do you want to improve runtime? Note that original images will be shrink.",
+                                                   QMessageBox.Yes, QMessageBox.No, )
+
+        if improveRuntimeReply == QMessageBox.Yes:
+            self.shrinkImages = True
+        else:
+            self.shrinkImages = False
+
         # Widgets definitions
         vbox = QVBoxLayout(self)
         self.errDialog = QtWidgets.QErrorMessage()  # self because it called in another function
@@ -43,10 +52,12 @@ class MainMenu(QtWidgets.QMainWindow):
         self.show()
 
     def loadImage(self, t):
+
         name = QFileDialog.getOpenFileName(self, 'Select Color Image', QDir.currentPath(),
                                            "Image files (*.jpg, *.gif, *.png)")
         if name:
-            shrinkImage(name[0])
+            if self.shrinkImages:
+                shrinkImage(name[0])
             if t == 'b':
                 self.binImgPath = name[0]
                 self.binaryImg, self.binImgObj = binaryConvert(self.binImgPath)
@@ -97,7 +108,6 @@ class MainMenu(QtWidgets.QMainWindow):
             self.decipherImg = FlipColumnAndRows(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
 
             img = arrToImage(self.decipherImg, 'L')
-            # enlargeImage('binaryImg.png')
             img.show()
         finally:
             # Break function in any case
