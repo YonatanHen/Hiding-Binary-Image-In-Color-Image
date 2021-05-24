@@ -5,6 +5,7 @@ from Functions.imageConvertionFuncs import *
 from Functions.errorMessages import *
 from Functions.algorithms import *
 from Functions.resizeImage import *
+from Functions.bitManipulation import *
 
 
 class MainMenu(QtWidgets.QMainWindow):
@@ -94,7 +95,7 @@ class MainMenu(QtWidgets.QMainWindow):
 
         #If submitted
         else:
-            self.decipherImg = DavidsImprovement(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
+            self.decipherImg = HVFlip(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
 
             img = arrToImage(self.decipherImg, 'L')
             # enlargeImage('binaryImg.png')
