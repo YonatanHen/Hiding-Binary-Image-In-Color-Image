@@ -1,13 +1,13 @@
 from PIL import Image
 import cv2
 
-def shrinkImage(imgPath):
+def reduceImage(imgPath):
     img = Image.open(imgPath)
     width, height = img.size
-    new_width = int(width / 2)
-    new_height = int(height / 2)
-    img.thumbnail((new_width, new_height), Image.ANTIALIAS)
-    img.save(imgPath, quality=95, optimized=True)
+    new_width = int(width / 1.5)
+    new_height = int(height / 1.5)
+    newImg = img.resize((new_width, new_height), Image.BICUBIC)
+    newImg.save(imgPath, quality=95, optimized=True)
     print(img)
 
     return
@@ -16,8 +16,8 @@ def shrinkImage(imgPath):
 def enlargeImage(imgPath):
     img = Image.open(imgPath)
     width, height = img.size
-    new_width = int(width * 2)
-    new_height = int(height * 2)
+    new_width = int(width * 1.5)
+    new_height = int(height * 1.5)
     newImg = img.resize((new_width, new_height), Image.ANTIALIAS)
     newImg.save(imgPath, quality=95)
 
