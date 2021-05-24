@@ -65,7 +65,7 @@ class MainMenu(QtWidgets.QMainWindow):
             elif not checkImagesSize(self.binImgObj, self.colorImgObj):
                 raise ValueError
             else:
-                print('Successfully received input, implmenting algorithm...')
+                print('Successfully received input, implementing algorithm...')
 
                 # If everything is ok, embed the binary image into the color image
                 self.encryptedImg = embeddingAlgorithm(self.encryptedImg, self.binaryImg)
