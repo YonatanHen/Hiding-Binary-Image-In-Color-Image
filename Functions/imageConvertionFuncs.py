@@ -1,6 +1,5 @@
 import numpy as np
 from PIL import Image
-from Functions.bitManipulation import *
 import sys
 from Functions.errorMessages import errorMessage
 
@@ -28,11 +27,12 @@ def binaryConvert(path):
     img = Image.open(path).convert('L')
 
     arr = np.array(img)
+
     # Convert boolean to binary
     newArr = ~arr
     newArr[newArr > 0] = 1
-    newArr = HVFlip(newArr)
-    print(newArr)
+    newArr = DavidsImprovement(newArr)
+
     return newArr, img
 
 
@@ -52,14 +52,11 @@ def arrToImage(arr, type):
     elif type == 'L':
         imageName = 'binaryImg.png'
         # print(np.array([[255 if x == 1 else 0 for x in y] for y in arr]))
-        print(arr)
         width = len(arr)
         height = len(arr[0])
         arr = np.array(arr).flatten()
         arr = np.array(list(map(lambda x: 255 if x == 0 else 0, arr))).reshape(width, height)
-        print(arr)
-        img2 = Image.fromarray(arr, 'PA').convert('1')
-        print(img2)
+        img2 = Image.fromarray(arr.astype('uint8'), 'L').convert('1')
         # Save the image
         img2.save(imageName)
         return img2
@@ -68,3 +65,11 @@ def arrToImage(arr, type):
         return
 
 
+def DavidsImprovement(binImage):
+    # switching bits + replace even with odd rows
+    for i in range(len(binImage)-1):
+        for j in range(len(binImage[i]) - 2):
+            binImage[i][j], binImage[i][j + 1] = binImage[i][j + 1], binImage[i][j]
+        binImage[i], binImage[i + 1] = binImage[i + 1], binImage[i]
+
+    return binImage

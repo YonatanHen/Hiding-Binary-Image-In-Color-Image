@@ -40,6 +40,7 @@ def embeddingAlgorithm(colorImgArr, binaryImgArr):
 
 def reconstructedAlgorithm(colorImgArr, binaryImgArr):
     """Function implements the reconstructed algorithm which described in chapter 6.2 in the article"""
+    print(colorImgArr)
     reconstructedImage = []
     # reconstructedImage = [[0 for i in range(len(colorImgArr[0]))] for j in range(len(colorImgArr))]
     for row in range(len(binaryImgArr)):
@@ -55,5 +56,6 @@ def reconstructedAlgorithm(colorImgArr, binaryImgArr):
                     reconstructedImage[row].append(0)
                 else:
                     reconstructedImage[row].append(1)
+
 
     return reconstructedImage

@@ -5,7 +5,6 @@ from Functions.imageConvertionFuncs import *
 from Functions.errorMessages import *
 from Functions.algorithms import *
 from Functions.resizeImage import *
-from Functions.bitManipulation import *
 
 
 class MainMenu(QtWidgets.QMainWindow):
@@ -47,7 +46,7 @@ class MainMenu(QtWidgets.QMainWindow):
         name = QFileDialog.getOpenFileName(self, 'Select Color Image', QDir.currentPath(),
                                            "Image files (*.jpg, *.gif, *.png)")
         if name:
-            shrinkImage(name[0])
+            # shrinkImage(name[0])
             if t == 'b':
                 self.binImgPath = name[0]
                 self.binaryImg, self.binImgObj = binaryConvert(self.binImgPath)
@@ -66,7 +65,7 @@ class MainMenu(QtWidgets.QMainWindow):
             elif not checkImagesSize(self.binImgObj, self.colorImgObj):
                 raise ValueError
             else:
-                print('Successfully received input, implmenting algorithm...')
+                print('Successfully received input, implementing algorithm...')
 
                 # If everything is ok, embed the binary image into the color image
                 self.encryptedImg = embeddingAlgorithm(self.encryptedImg, self.binaryImg)
@@ -95,10 +94,10 @@ class MainMenu(QtWidgets.QMainWindow):
 
         #If submitted
         else:
-            self.decipherImg = HVFlip(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
+            self.decipherImg = DavidsImprovement(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
 
             img = arrToImage(self.decipherImg, 'L')
-            enlargeImage('binaryImg.png')
+            # enlargeImage('binaryImg.png')
             img.show()
         finally:
             # Break function in any case
