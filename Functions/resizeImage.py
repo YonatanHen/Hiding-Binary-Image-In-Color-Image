@@ -17,7 +17,7 @@ def enlargeImage(imgPath):
     width, height = img.size
     new_width = int(width * 2)
     new_height = int(height * 2)
-    newImg =img.resize((new_width, new_height))
+    newImg = img.resize((new_width, new_height))
     newImg.save(imgPath)
     print(img)
 
