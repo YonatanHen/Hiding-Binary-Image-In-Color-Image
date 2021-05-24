@@ -46,7 +46,7 @@ class MainMenu(QtWidgets.QMainWindow):
         name = QFileDialog.getOpenFileName(self, 'Select Color Image', QDir.currentPath(),
                                            "Image files (*.jpg, *.gif, *.png)")
         if name:
-            shrinkImage(name[0])
+            # shrinkImage(name[0])
             if t == 'b':
                 self.binImgPath = name[0]
                 self.binaryImg, self.binImgObj = binaryConvert(self.binImgPath)
@@ -97,7 +97,7 @@ class MainMenu(QtWidgets.QMainWindow):
             self.decipherImg = DavidsImprovement(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
 
             img = arrToImage(self.decipherImg, 'L')
-            enlargeImage('binaryImg.png')
+            # enlargeImage('binaryImg.png')
             img.show()
         finally:
             # Break function in any case
