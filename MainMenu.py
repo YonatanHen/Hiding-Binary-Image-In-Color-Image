@@ -57,7 +57,7 @@ class MainMenu(QtWidgets.QMainWindow):
                                            "Image files (*.jpg, *.gif, *.png)")
         if name:
             if self.shrinkImages:
-                shrinkImage(name[0])
+                reduceImage(name[0])
             if t == 'b':
                 self.binImgPath = name[0]
                 self.binaryImg, self.binImgObj = binaryConvert(self.binImgPath)
