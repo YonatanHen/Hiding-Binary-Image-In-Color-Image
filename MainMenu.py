@@ -17,7 +17,7 @@ class MainMenu(QtWidgets.QMainWindow):
         self.submitted = False
 
         improveRuntimeReply = QMessageBox.question(self, "Before we get started!",
-                                                   "Do you want to improve runtime? Note that original images will be shrink.",
+                                                   "Do you want to improve runtime? Note that original images will be shrink and data can be lost.",
                                                    QMessageBox.Yes, QMessageBox.No, )
 
         if improveRuntimeReply == QMessageBox.Yes:
@@ -101,7 +101,7 @@ class MainMenu(QtWidgets.QMainWindow):
                 raise NotImplementedError
 
         except NotImplementedError:
-            errorMessage('Embedding algorithm must be done before reconstructing!')
+            errorMessage('Encryption must be done before deciphering!')
 
         #If submitted
         else:
