@@ -1,7 +1,7 @@
 import numpy as np
 from PIL import Image
 import sys
-from Functions.errorMessages import errorMessage
+from Functions.bitManipulation import HVFlip
 
 # To see the full output uncommit the line below
 np.set_printoptions(threshold=sys.maxsize)
@@ -31,7 +31,7 @@ def binaryConvert(path):
     # Convert boolean to binary
     newArr = ~arr
     newArr[newArr > 0] = 1
-    newArr = FlipColumnAndRows(newArr)
+    newArr = HVFlip(newArr)
 
     return newArr, img
 
@@ -63,13 +63,3 @@ def arrToImage(arr, type):
     else:
         print('Err')
         return
-
-
-def FlipColumnAndRows(binImage):
-    # switching bits + replace even with odd rows
-    for i in range(len(binImage)-1):
-        for j in range(len(binImage[i]) - 2):
-            binImage[i][j], binImage[i][j + 1] = binImage[i][j + 1], binImage[i][j]
-        binImage[i], binImage[i + 1] = binImage[i + 1], binImage[i]
-
-    return binImage

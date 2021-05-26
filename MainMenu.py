@@ -105,7 +105,7 @@ class MainMenu(QtWidgets.QMainWindow):
 
         #If submitted
         else:
-            self.decipherImg = FlipColumnAndRows(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
+            self.decipherImg = HVFlip(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
 
             img = arrToImage(self.decipherImg, 'L')
             img.show()
