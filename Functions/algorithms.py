@@ -1,6 +1,6 @@
 # Utility Functions:
 import numpy as np
-
+#.
 
 def XOR(a, b):
     """Implements XOR operation: if a != b return true, else false."""
