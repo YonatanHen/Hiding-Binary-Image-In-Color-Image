@@ -2,6 +2,7 @@ from PIL import Image
 import cv2
 
 def reduceImage(imgPath):
+    """Function reduce image height and width by 1.5 of the original size"""
     img = Image.open(imgPath)
     width, height = img.size
     new_width = int(width / 1.5)
@@ -14,6 +15,7 @@ def reduceImage(imgPath):
 
 
 def enlargeImage(imgPath):
+    """Function increase image height and width 1.5 times - i.e the function restores original values"""
     img = Image.open(imgPath)
     width, height = img.size
     new_width = int(width * 1.5)
