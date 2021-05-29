@@ -15,7 +15,7 @@ class MainMenu(QtWidgets.QMainWindow):
 
         # Class variables definition (Optional but the vars definitions below necessary)
         self.encryptedImg = self.binaryImg = self.decipherImg = None
-        self.checksumArr=[]
+        self.checksumArr = []
         self.submitted = False
 
         improveRuntimeReply = QMessageBox.question(self, "Before we get started!",
@@ -82,7 +82,7 @@ class MainMenu(QtWidgets.QMainWindow):
 
                 # If everything is ok, embed the binary image into the color image
                 self.encryptedImg = embeddingAlgorithm(self.encryptedImg, self.binaryImg)
-                self.checksumArr= createChecksum(self.encryptedImg)
+                self.checksumArr = createChecksum(self.encryptedImg)
 
                 # show results
                 img = arrToImage(self.encryptedImg, 'RGB')
@@ -106,7 +106,7 @@ class MainMenu(QtWidgets.QMainWindow):
         except NotImplementedError:
             errorMessage('Encryption must be done before deciphering!')
 
-        #If submitted
+        # If submitted
         else:
             self.decipherImg = HVFlip(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
 
