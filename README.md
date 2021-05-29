@@ -12,10 +12,13 @@ The encrypted image had been saved as colorImage.png whereas decrypted image sav
 ### Screenshots:
 
 Main menu:
+
 ![main menu](/Images/mainMenu.PNG)
 
 Encryption results window:
+
 ![encryption](/Images/encrypted-image.PNG)
 
 Decryption results window:
+
 ![decryption](/Images/decrypted-image.PNG)
