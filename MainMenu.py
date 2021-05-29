@@ -5,6 +5,7 @@ from Functions.imageConvertionFuncs import *
 from Functions.errorMessages import *
 from Functions.algorithms import *
 from Functions.resizeImage import *
+from Functions.checksum import *
 
 
 class MainMenu(QtWidgets.QMainWindow):
@@ -14,6 +15,7 @@ class MainMenu(QtWidgets.QMainWindow):
 
         # Class variables definition (Optional but the vars definitions below necessary)
         self.encryptedImg = self.binaryImg = self.decipherImg = None
+        self.checksumArr=[]
         self.submitted = False
 
         improveRuntimeReply = QMessageBox.question(self, "Before we get started!",
@@ -80,6 +82,7 @@ class MainMenu(QtWidgets.QMainWindow):
 
                 # If everything is ok, embed the binary image into the color image
                 self.encryptedImg = embeddingAlgorithm(self.encryptedImg, self.binaryImg)
+                self.checksumArr= checksum(self.encryptedImg)
 
                 # show results
                 img = arrToImage(self.encryptedImg, 'RGB')
