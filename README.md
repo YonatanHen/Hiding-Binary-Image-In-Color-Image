@@ -15,7 +15,7 @@ Main menu:
 ![main menu](/images/mainMenu.PNG)
 
 Encryption results window:
-![encryption](/images/encrypted Image.PNG)
+![encryption](/images/encrypted-image.PNG)
 
 Decryption results window:
-![decyption](/images/decrypted image.PNG)
+![decyption](/images/decrypted-image.PNG)
