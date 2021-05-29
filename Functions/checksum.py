@@ -12,6 +12,12 @@ def divideSequence(sequence):
             x2.append(sequence[k])
         if k >= 16 and k <= 23:
             x3.append(sequence[k])
+
+    # Converting the three 8 bit sequences into integer numbers
+    x1 = int(''.join(map(str, x1)), 2)
+    x2 = int(''.join(map(str, x2)), 2)
+    x3 = int(''.join(map(str, x3)), 2)
+
     return x1, x2, x3
 
 
@@ -27,7 +33,7 @@ def proccessChecksum(x1, x2, x3, checksum):
         result = result & 0x0FF  # Removing the carry
         result = result + 0x01  # Summing the checksum with the carry
     if checksum is not None:  # For testing an existing checksum
-        result = result + checksum
+        result = result + int(checksum,2)
         if result == 0xFF:
             return True
         else:
@@ -43,13 +49,8 @@ def createChecksum(embeddedImage):
 
     for i in range(len(embeddedImage)):
         for j in range(len(embeddedImage[i])):
-            # Creating 3 lists that each of them will contain 8 bits out of the 24 bits
+            # Creating 3 numbers that each of them will contain 8 bits out of the 24 bits from the sequence
             x1, x2, x3 = divideSequence(embeddedImage[i][j])
-
-            # Converting the three 8 bit sequences into integer numbers
-            x1 = int(''.join(map(str, x1)), 2)
-            x2 = int(''.join(map(str, x2)), 2)
-            x3 = int(''.join(map(str, x3)), 2)
 
             # Creating the checksum
             checksum = proccessChecksum(x1, x2, x3, None)
@@ -59,10 +60,15 @@ def createChecksum(embeddedImage):
     return checksumArr
 
 
-def testCheckSum(embeddedImage, checkSumArr):
+def testChecksum(embeddedImage, checksumArr):
     """Testing the checksum to see if it's valid"""
 
     for i in range(len(embeddedImage)):
         for j in range(len(embeddedImage[i])):
-            # Creating 3 lists that each of them will contain 8 bits out of the 24 bits
+            # Creating 3 numbers that each of them will contain 8 bits out of the 24 bits from the sequence
             x1, x2, x3 = divideSequence(embeddedImage[i][j])
+            for checksum in checksumArr:
+                result = proccessChecksum(x1, x2, x3, checksum)
+                if result is False:  # checksum is invalid
+                    return result
+    return True  # if for every iteration the checksum is 11111111, return true

@@ -83,7 +83,6 @@ class MainMenu(QtWidgets.QMainWindow):
                 # If everything is ok, embed the binary image into the color image
                 self.encryptedImg = embeddingAlgorithm(self.encryptedImg, self.binaryImg)
                 self.checksumArr = createChecksum(self.encryptedImg)
-
                 # show results
                 img = arrToImage(self.encryptedImg, 'RGB')
                 img.show()
