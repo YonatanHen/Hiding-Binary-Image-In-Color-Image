@@ -6,3 +6,6 @@ which described here: https://www.sciencepubco.com/index.php/ijet/article/view/1
 The project is an OO final project of College Data Security course
 
 To see which packages you should install to run the code, type and run 'pip freeze' in termianl :)
+
+The encrypted image had been saved as colorImage.png whereas decrypted image saved as a binaryImage.png, both pictures base on the given files in the Pictures directory.
+
