@@ -1,4 +1,4 @@
-def checksum(embeddedImage):
+def createChecksum(embeddedImage):
     """This algorithm will create a checksum for every 24 bit sequence of the embedded image"""
 
     checksumArr=[] # A list of checksums, checksum for each sequence
