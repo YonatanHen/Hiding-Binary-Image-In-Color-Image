@@ -22,4 +22,4 @@ def checkImagesSize(bin, color):
     c_width, c_height = color.size
 
     # implement the condition
-    return b_width <= c_width && b_height <= c_height
+    return b_width <= c_width and b_height <= c_height
