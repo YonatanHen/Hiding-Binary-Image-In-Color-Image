@@ -63,7 +63,7 @@ class MainMenu(QtWidgets.QMainWindow):
             if t == 'b':
                 self.binImgPath = name[0]
                 self.binaryImg, self.binImgObj = binaryConvert(self.binImgPath)
-                # print(self.binaryImg)
+                print(self.binaryImg)
             else:
                 self.colorImgPath = name[0]
                 self.encryptedImg, self.colorImgObj = RGBConvert(self.colorImgPath)
@@ -83,6 +83,7 @@ class MainMenu(QtWidgets.QMainWindow):
                 # If everything is ok, embed the binary image into the color image
                 self.encryptedImg = embeddingAlgorithm(self.encryptedImg, self.binaryImg)
                 self.checksumArr = createChecksum(self.encryptedImg)
+                print(testChecksum(self.encryptedImg,self.checksumArr))
                 # show results
                 img = arrToImage(self.encryptedImg, 'RGB')
                 img.show()

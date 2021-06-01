@@ -33,12 +33,13 @@ def proccessChecksum(x1, x2, x3, checksum):
         result = result & 0x0FF  # Removing the carry
         result = result + 0x01  # Summing the checksum with the carry
     if checksum is not None:  # For testing an existing checksum
-        result = result + int(checksum,2)
+        result = result + int(checksum, 2)
         if result == 0xFF:
             return True
         else:
             return False
     else:  # For creating a new checksum
+        result = result ^ 0xFF
         return result
 
 
@@ -63,12 +64,13 @@ def createChecksum(embeddedImage):
 def testChecksum(embeddedImage, checksumArr):
     """Testing the checksum to see if it's valid"""
 
+    index = 0
     for i in range(len(embeddedImage)):
         for j in range(len(embeddedImage[i])):
             # Creating 3 numbers that each of them will contain 8 bits out of the 24 bits from the sequence
             x1, x2, x3 = divideSequence(embeddedImage[i][j])
-            for checksum in checksumArr:
-                result = proccessChecksum(x1, x2, x3, checksum)
-                if result is False:  # checksum is invalid
-                    return result
+            result = proccessChecksum(x1, x2, x3, checksumArr[index])
+            if result is False:  # checksum is invalid
+                return result
+            index = index + 1
     return True  # if for every iteration the checksum is 11111111, return true
