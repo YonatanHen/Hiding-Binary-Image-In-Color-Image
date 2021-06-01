@@ -112,7 +112,7 @@ class MainMenu(QtWidgets.QMainWindow):
             testResult = testChecksum(self.decipherImg, self.checksumArr)
             if testResult==False:
                 print(testResult)
-                QMessageBox.about(self,"Error","Checksum doesn't match the checksum of the original image")
+                errorMessage("Checksum is not valid!")
             else:
                 print(testResult)
                 img = arrToImage(self.decipherImg, 'L')
