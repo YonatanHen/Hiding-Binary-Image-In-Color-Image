@@ -1,8 +1,24 @@
 # DataSecurityProject
 
-This project implements the Improved method using a two Exclusive-OR to binary image in RGB color image steganography algorithm 
+This project implements the Improved method using a two Exclusive-OR to a binary image in RGB color image steganography algorithm 
 which described here: https://www.sciencepubco.com/index.php/ijet/article/view/19692
 
 The project is an OO final project of College Data Security course
 
 To see which packages you should install to run the code, type and run 'pip freeze' in termianl :)
+
+The encrypted image had been saved as colorImage.png whereas decrypted image saved as a binaryImage.png, both pictures base on the given files in the Pictures directory.
+
+### Screenshots:
+
+Main menu:
+
+![main menu](/Images/mainMenu.PNG)
+
+Encryption results window:
+
+![encryption](/Images/encrypted-image.PNG)
+
+Decryption results window:
+
+![decryption](/Images/decrypted-image.PNG)
