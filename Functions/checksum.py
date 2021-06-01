@@ -5,13 +5,13 @@ def divideSequence(sequence):
     x2 = []
     x3 = []
 
-    for k in range(len(sequence)):
-        if k >= 0 and k <= 7:
-            x1.append(sequence[k])
-        if k >= 8 and k <= 15:
-            x2.append(sequence[k])
-        if k >= 16 and k <= 23:
-            x3.append(sequence[k])
+    for i in range(len(sequence)):
+        if i >= 0 and i <= 7:
+            x1.append(sequence[i])
+        if i >= 8 and i <= 15:
+            x2.append(sequence[i])
+        if i >= 16 and i <= 23:
+            x3.append(sequence[i])
 
     # Converting the three 8 bit sequences into integer numbers
     x1 = int(''.join(map(str, x1)), 2)
@@ -43,34 +43,32 @@ def proccessChecksum(x1, x2, x3, checksum):
         return result
 
 
-def createChecksum(embeddedImage):
-    """This algorithm will create a checksum for every 24 bit sequence of the embedded image"""
+def createChecksum(binaryImage):
+    """This algorithm will create a checksum for every 24 bit sequence of the binary image"""
 
     checksumArr = []  # A list of checksums, checksum for each sequence
 
-    for i in range(len(embeddedImage)):
-        for j in range(len(embeddedImage[i])):
-            # Creating 3 numbers that each of them will contain 8 bits out of the 24 bits from the sequence
-            x1, x2, x3 = divideSequence(embeddedImage[i][j])
+    for i in range(len(binaryImage)):
+        # Creating 3 numbers that each of them will contain 8 bits out of the 24 bits from the sequence
+        x1, x2, x3 = divideSequence(binaryImage[i])
 
-            # Creating the checksum
-            checksum = proccessChecksum(x1, x2, x3, None)
-            checksum = bin(checksum)
-            checksumArr.append(checksum)
+        # Creating the checksum
+        checksum = proccessChecksum(x1, x2, x3, None)
+        checksum = bin(checksum)
+        checksumArr.append(checksum)
 
     return checksumArr
 
 
-def testChecksum(embeddedImage, checksumArr):
+def testChecksum(binaryImage, checksumArr):
     """Testing the checksum to see if it's valid"""
 
     index = 0
-    for i in range(len(embeddedImage)):
-        for j in range(len(embeddedImage[i])):
-            # Creating 3 numbers that each of them will contain 8 bits out of the 24 bits from the sequence
-            x1, x2, x3 = divideSequence(embeddedImage[i][j])
-            result = proccessChecksum(x1, x2, x3, checksumArr[index])
-            if result is False:  # checksum is invalid
-                return result
-            index = index + 1
+    for i in range(len(binaryImage)):
+        # Creating 3 numbers that each of them will contain 8 bits out of the 24 bits from the sequence
+        x1, x2, x3 = divideSequence(binaryImage[i])
+        result = proccessChecksum(x1, x2, x3, checksumArr[index])
+        if result is False:  # checksum is invalid
+            return result
+        index = index + 1
     return True  # if for every iteration the checksum is 11111111, return true
