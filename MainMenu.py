@@ -5,6 +5,7 @@ from Functions.imageConvertionFuncs import *
 from Functions.errorMessages import *
 from Functions.algorithms import *
 from Functions.resizeImage import *
+from Functions.checksum import *
 
 
 class MainMenu(QtWidgets.QMainWindow):
@@ -14,6 +15,7 @@ class MainMenu(QtWidgets.QMainWindow):
 
         # Class variables definition (Optional but the vars definitions below necessary)
         self.encryptedImg = self.binaryImg = self.decipherImg = None
+        self.checksumArr = []
         self.submitted = False
 
         improveRuntimeReply = QMessageBox.question(self, "Before we get started!",
@@ -62,6 +64,8 @@ class MainMenu(QtWidgets.QMainWindow):
                 self.binImgPath = name[0]
                 self.binaryImg, self.binImgObj = binaryConvert(self.binImgPath)
                 # print(self.binaryImg)
+                self.checksumArr = createChecksum(self.binaryImg)
+                # print(self.checksumArr)
             else:
                 self.colorImgPath = name[0]
                 self.encryptedImg, self.colorImgObj = RGBConvert(self.colorImgPath)
@@ -80,7 +84,6 @@ class MainMenu(QtWidgets.QMainWindow):
 
                 # If everything is ok, embed the binary image into the color image
                 self.encryptedImg = embeddingAlgorithm(self.encryptedImg, self.binaryImg)
-
                 # show results
                 img = arrToImage(self.encryptedImg, 'RGB')
                 img.show()
@@ -103,12 +106,17 @@ class MainMenu(QtWidgets.QMainWindow):
         except NotImplementedError:
             errorMessage('Encryption must be done before deciphering!')
 
-        #If submitted
+        # If submitted
         else:
             self.decipherImg = HVFlip(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
-
-            img = arrToImage(self.decipherImg, 'L')
-            img.show()
+            testResult = testChecksum(self.decipherImg, self.checksumArr)
+            if testResult==False:
+                print(testResult)
+                QMessageBox.about(self,"Error","Checksum doesn't match the checksum of the original image")
+            else:
+                print(testResult)
+                img = arrToImage(self.decipherImg, 'L')
+                img.show()
         finally:
             # Break function in any case
             return
