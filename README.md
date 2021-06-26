@@ -14,18 +14,3 @@ In addition, we added 3 improvements to the algorithm:
 1. Resizing images before encryption to improve algorithm speed.
 2. Flipping bits to improve the security.
 3. Checksum to each pixel to improve data transformation reliability.
-
-
-### Screenshots:
-
-Main menu:
-
-![main menu](/Images/mainMenu.PNG)
-
-Encryption results window:
-
-![encryption](/Images/encrypted-image.PNG)
-
-Decryption results window:
-
-![decryption](/Images/decrypted-image.PNG)
