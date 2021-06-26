@@ -8,7 +8,7 @@ The project is an OO final project of Data Security course.
 
 To see which packages you should install to run the code, type and run 'pip freeze' in the terminal :)
 
-The encrypted image had been saved as colorImage.png whereas decrypted image was saved as a binaryImage.png, both pictures based on the pictures' given files in the Pictures directory.
+The encrypted image had been saved as colorImage.png whereas decrypted image was saved as a binaryImage.png.
 
 In addition, we added 3 improvements to the algorithm:
 1. Resizing images before encryption to improve algorithm speed.
