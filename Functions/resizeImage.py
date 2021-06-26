@@ -1,5 +1,4 @@
 from PIL import Image
-import cv2
 
 def reduceImage(imgPath):
     """Function reduce image height and width by 1.5 of the original size"""

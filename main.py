@@ -1,4 +1,3 @@
-import sys
 from MainMenu import *
 
 app = QtWidgets.QApplication(sys.argv) # Create an instance of QtWidgets.QApplication

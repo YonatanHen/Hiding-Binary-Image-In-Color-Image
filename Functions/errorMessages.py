@@ -1,6 +1,4 @@
 from PyQt5.QtWidgets import QMessageBox
-from PIL import Image
-
 
 def errorMessage(text):
     '''Handles the GUI error message box'''

@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, uic, QtCore
-from PyQt5.QtCore import QDir, QFile, QFileInfo, QIODevice
+from PyQt5.QtCore import QDir
 from PyQt5.QtWidgets import QVBoxLayout, QFileDialog
 from Functions.imageConvertionFuncs import *
 from Functions.errorMessages import *
