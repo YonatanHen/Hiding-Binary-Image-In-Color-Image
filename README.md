@@ -4,7 +4,7 @@
 This project implements the Improved method using two Exclusive-OR to a binary image in RGB color image steganography algorithm 
 which described here: https://www.sciencepubco.com/index.php/ijet/article/view/19692
 
-The project is an OO final project of the College Data Security course
+The project is an OO final project of Data Security course.
 
 To see which packages you should install to run the code, type and run 'pip freeze' in the terminal :)
 
