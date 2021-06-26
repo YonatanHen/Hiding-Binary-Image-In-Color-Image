@@ -7,6 +7,7 @@ def reduceImage(imgPath):
     new_width = int(width / 1.5)
     new_height = int(height / 1.5)
     newImg = img.resize((new_width, new_height), Image.BICUBIC)
-    newImg.save(imgPath, quality=95, optimized=True)
+    newPath = imgPath[:-4] + ' shrinked.png'
+    newImg.save(newPath, quality=95, optimized=True)
 
-    return
+    return newPath

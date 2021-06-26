@@ -19,7 +19,7 @@ class MainMenu(QtWidgets.QMainWindow):
         self.submitted = False
 
         improveRuntimeReply = QMessageBox.question(self, "Before we get started!",
-                                                   "Do you want to improve runtime? Note that original images will be shrink and data can be lost.",
+                                                   "Do you want to improve runtime? Note that data can be lost.",
                                                    QMessageBox.Yes, QMessageBox.No, )
 
         if improveRuntimeReply == QMessageBox.Yes:
@@ -57,17 +57,18 @@ class MainMenu(QtWidgets.QMainWindow):
 
         name = QFileDialog.getOpenFileName(self, 'Select Color Image', QDir.currentPath(),
                                            "Image files (*.jpg, *.gif, *.png)")
+        path = name[0]
         if name:
             if self.shrinkImages:
-                reduceImage(name[0])
+                path = reduceImage(path)
             if t == 'b':
-                self.binImgPath = name[0]
+                self.binImgPath = path
                 self.binaryImg, self.binImgObj = binaryConvert(self.binImgPath)
                 # print(self.binaryImg)
                 self.checksumArr = createChecksum(self.binaryImg)
                 # print(self.checksumArr)
             else:
-                self.colorImgPath = name[0]
+                self.colorImgPath = path
                 self.encryptedImg, self.colorImgObj = RGBConvert(self.colorImgPath)
                 # print(self.colorImg)
 
