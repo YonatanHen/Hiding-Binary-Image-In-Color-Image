@@ -41,7 +41,7 @@ def arrToImage(arr, type):
     encryptArr = arr
     # Set new image name, according to received image type
     if type == 'RGB':
-        imageName = 'colorImg.png'
+        imageName = 'encryptedImage.png'
         # Pack bits again and convert array to image
         encryptArr = np.packbits(arr, axis=2)
         img = Image.fromarray(encryptArr, type)
@@ -50,7 +50,7 @@ def arrToImage(arr, type):
         img.save(imageName)
         return img
     elif type == 'L':
-        imageName = 'binaryImg.png'
+        imageName = 'decyptedImage.png'
         # print(np.array([[255 if x == 1 else 0 for x in y] for y in arr]))
         width = len(arr)
         height = len(arr[0])
