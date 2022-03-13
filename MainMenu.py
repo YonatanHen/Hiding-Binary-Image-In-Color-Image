@@ -6,6 +6,8 @@ from Functions.errorMessages import *
 from Functions.algorithms import *
 from Functions.resizeImage import *
 from Functions.checksum import *
+from os import path
+from PIL import Image
 
 
 class MainMenu(QtWidgets.QMainWindow):
@@ -58,6 +60,7 @@ class MainMenu(QtWidgets.QMainWindow):
         name = QFileDialog.getOpenFileName(self, 'Select Color Image', QDir.currentPath(),
                                            "Image files (*.jpg, *.gif, *.png)")
         path = name[0]
+        print(name[0])
         if name:
             if self.shrinkImages:
                 path = reduceImage(path)
@@ -101,7 +104,7 @@ class MainMenu(QtWidgets.QMainWindow):
 
     def handleDecipher(self):
         try:
-            if not self.submitted:
+            if not self.submitted and path.exists("../encryptedImage.png"):
                 raise NotImplementedError
 
         except NotImplementedError:
@@ -109,15 +112,20 @@ class MainMenu(QtWidgets.QMainWindow):
 
         # If submitted
         else:
-            self.decipherImg = HVFlip(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
-            testResult = testChecksum(self.decipherImg, self.checksumArr)
-            if testResult==False:
-                print(testResult)
-                errorMessage("Checksum is not valid!")
-            else:
-                print(testResult)
-                img = arrToImage(self.decipherImg, 'L')
+            if path.exists("../encryptedImage.png"):
+                self.decipherImg = Image.open("../encryptedImage.png")
+                img = arrToImage(self.decipherImg, 'RGB')
                 img.show()
+            else:
+                self.decipherImg = HVFlip(reconstructedAlgorithm(self.encryptedImg, self.binaryImg))
+                testResult = testChecksum(self.decipherImg, self.checksumArr)
+                if testResult==False:
+                    print(testResult)
+                    errorMessage("Checksum is not valid!")
+                else:
+                    print(testResult)
+                    img = arrToImage(self.decipherImg, 'L')
+                    img.show()
         finally:
             # Break function in any case
             return
