@@ -1,4 +1,4 @@
-# DataSecurityProject
+# Data Security Project
 
 
 This project implements the Improved method using two Exclusive-OR to a binary image in RGB color image steganography algorithm 
